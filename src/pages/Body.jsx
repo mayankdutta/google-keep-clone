@@ -2,8 +2,6 @@ import React from "react";
 import { useState } from "react";
 
 function Body() {
-  const cardCSS =
-    "p-4 bg-gray-100 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4 ";
   const mainCardCSS =
     "p-4 bg-gray-100 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4 ";
   const buttonCSS =
