@@ -4,9 +4,10 @@ import { useState } from "react";
 function Body() {
   const cardCSS =
     "p-4 bg-gray-100 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4 ";
+  const mainCardCSS =
+    "p-4 bg-gray-100 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4 ";
   const buttonCSS =
-    "w-10 h-10 p-1 text-white bg-red-500 rounded-full md:text-2xl justify-self-end shadow-2xl outline-none focus:outline-none";
-
+    "w-16 h-16 p-2 font-bold text-white bg-red-500 rounded-full shadow-2xl outline-none md:text-4xl justify-self-end focus:outline-none ";
   const [data, setData] = useState({
     title: "",
     desc: "",
@@ -67,7 +68,7 @@ function Body() {
     <div>
       <div className="my-5 grid justify-items-center grid-rows-1 ">
         <div
-          className={cardCSS}
+          className={mainCardCSS}
           onMouseEnter={() => {
             setExpand(true);
           }}
@@ -99,7 +100,7 @@ function Body() {
         </div>
       </div>
 
-      <div className="mx-8 grid grid-cols-4 gap-x-16 gap-y-4">
+      <div className="mx-8 grid grid-cols-4 gap-x-16 gap-y-8">
         {arr.map((value, index) => {
           return (
             <div
@@ -115,13 +116,18 @@ function Body() {
                */
               key={index}
               id={index}
-              className={cardCSS}
+              className="relative p-4 bg-yellow-400 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4"
             >
-              <div className="overflow-auto text-4xl font-light font-medium">
-                {value.title}{" "}
+              <div
+                className="absolute w-full h-full bg-gray-800 shadow rounded-3xl top-4 left-4"
+                style={{ zIndex: "-1" }}
+              ></div>
+
+              <div className="overflow-auto text-4xl font-light font-medium border-b-8 border-gray-800">
+                {value.title}
               </div>
 
-              <div className="overflow-auto "> {value.desc}</div>
+              <div className="overflow-auto ">{value.desc}</div>
 
               <button
                 onClick={() => {
