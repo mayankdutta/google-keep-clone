@@ -3,20 +3,16 @@ import { useState } from "react";
 
 function Body() {
   const cardCSS =
-    "p-4 bg-gray-500 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4";
+    "p-4 bg-gray-100 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4";
   const buttonCSS =
-    "w-10 h-10 p-1 text-white bg-red-500 rounded-full md:text-2xl justify-self-end shadow-2xl";
+    "w-10 h-10 p-1 text-white bg-red-500 rounded-full md:text-2xl justify-self-end shadow-2xl outline-none focus:outline-none";
 
   const [data, setData] = useState({
     title: "",
     desc: "",
   });
-  const [arr, setArr] = useState([
-    {
-      title: "",
-      desc: "",
-    },
-  ]);
+  const [arr, setArr] = useState([]);
+  const [expand, setExpand] = useState(false);
 
   function updateTitle(event) {
     setData(function (prev) {
@@ -33,17 +29,28 @@ function Body() {
     setArr(function () {
       return [...arr, data];
     });
-    setData("");
+    setData({
+      title: "",
+      desc: "",
+    });
   }
 
   function del(id) {
-    console.log("value of id is : " + id);
+    let temp = [];
+    arr.forEach((value, index) => {
+      if (index !== id) {
+        temp.push(value);
+      }
+    });
 
-    setArr((oldData) => {
-      oldData.filter((value, index) => {
+    setArr(temp);
+    /*
+    setArr(() => {
+      arr.filter((value, index) => {
         return index !== id;
       });
     });
+    */
   }
 
   return (
@@ -55,14 +62,14 @@ function Body() {
             type="text"
             value={data.title}
             placeholder="Title"
-            className="font-light md:text-4xl "
+            className="font-light bg-gray-100 border-b-4 border-transparent outline-none md:text-4xl focus:border-yellow-400"
           />
           <input
             onChange={updateDesc}
             type="text"
             value={data.desc}
             placeholder="Write a note"
-            className=""
+            className="font-medium bg-gray-100 outline-none"
           />
           <button onClick={done} className={buttonCSS}>
             +
@@ -70,13 +77,13 @@ function Body() {
         </div>
       </div>
 
-      <div className="mx-4 grid grid-cols-4 gap-x-4 gap-y-4">
+      <div className="mx-8 grid grid-cols-4 gap-x-16 gap-y-4">
         {arr.map((value, index) => {
-          console.log("value of value is " + value.title);
-          console.log("value of index is " + index);
           return (
             <div key={index} id={index} className={cardCSS}>
-              <div className="">{value.title} </div>
+              <div className="text-4xl font-light font-medium">
+                {value.title}{" "}
+              </div>
               <div className=""> {value.desc}</div>
               <button
                 onClick={() => {
