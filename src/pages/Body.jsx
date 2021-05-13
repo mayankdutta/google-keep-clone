@@ -81,7 +81,7 @@ function Body() {
               type="text"
               value={data.title}
               placeholder="Title"
-              className="font-light bg-gray-100 border-b-4 border-transparent outline-none md:text-4xl focus:border-yellow-400"
+              className="overflow-auto font-light bg-gray-100 border-b-4 border-transparent outline-none md:text-4xl focus:border-yellow-400"
             />
           ) : null}
           <input
@@ -89,7 +89,7 @@ function Body() {
             type="text"
             value={data.desc}
             placeholder="Write a note"
-            className="font-medium bg-gray-100 outline-none"
+            className="overflow-auto font-medium bg-gray-100 outline-none"
           />
           {expand ? (
             <button onClick={done} className={buttonCSS}>
@@ -117,11 +117,11 @@ function Body() {
               id={index}
               className={cardCSS}
             >
-              <div className="text-4xl font-light font-medium">
+              <div className="overflow-auto text-4xl font-light font-medium">
                 {value.title}{" "}
               </div>
 
-              <div className=""> {value.desc}</div>
+              <div className="overflow-auto "> {value.desc}</div>
 
               <button
                 onClick={() => {
