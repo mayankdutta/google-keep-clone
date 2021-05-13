@@ -56,14 +56,28 @@ function Body() {
   return (
     <div>
       <div className="my-5 grid justify-items-center grid-rows-1">
-        <div className={cardCSS}>
-          <input
-            onChange={updateTitle}
-            type="text"
-            value={data.title}
-            placeholder="Title"
-            className="font-light bg-gray-100 border-b-4 border-transparent outline-none md:text-4xl focus:border-yellow-400"
-          />
+        <div
+          className={cardCSS}
+          onMouseEnter={() => {
+            setTimeout(() => {
+              setExpand(true);
+            }, 1000);
+          }}
+          onMouseLeave={() => {
+            setTimeout(() => {
+              setExpand(false);
+            }, 1000);
+          }}
+        >
+          {expand ? (
+            <input
+              onChange={updateTitle}
+              type="text"
+              value={data.title}
+              placeholder="Title"
+              className="font-light bg-gray-100 border-b-4 border-transparent outline-none md:text-4xl focus:border-yellow-400"
+            />
+          ) : null}
           <input
             onChange={updateDesc}
             type="text"
@@ -71,9 +85,11 @@ function Body() {
             placeholder="Write a note"
             className="font-medium bg-gray-100 outline-none"
           />
-          <button onClick={done} className={buttonCSS}>
-            +
-          </button>
+          {expand ? (
+            <button onClick={done} className={buttonCSS}>
+              +
+            </button>
+          ) : null}
         </div>
       </div>
 
@@ -84,7 +100,9 @@ function Body() {
               <div className="text-4xl font-light font-medium">
                 {value.title}{" "}
               </div>
+
               <div className=""> {value.desc}</div>
+
               <button
                 onClick={() => {
                   del(index);
