@@ -3,7 +3,7 @@ import { useState } from "react";
 
 function Body() {
   const cardCSS =
-    "p-4 bg-gray-100 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4";
+    "p-4 bg-gray-100 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4 ";
   const buttonCSS =
     "w-10 h-10 p-1 text-white bg-red-500 rounded-full md:text-2xl justify-self-end shadow-2xl outline-none focus:outline-none";
 
@@ -13,6 +13,7 @@ function Body() {
   });
   const [arr, setArr] = useState([]);
   const [expand, setExpand] = useState(false);
+  const [expArr, setExpArr] = useState([]);
 
   function updateTitle(event) {
     setData(function (prev) {
@@ -29,6 +30,11 @@ function Body() {
     setArr(function () {
       return [...arr, data];
     });
+
+    setExpArr(() => {
+      return [...expArr, false];
+    });
+
     setData({
       title: "",
       desc: "",
@@ -37,13 +43,17 @@ function Body() {
 
   function del(id) {
     let temp = [];
+    let tempExp = [];
     arr.forEach((value, index) => {
       if (index !== id) {
         temp.push(value);
+        tempExp.push(false);
       }
     });
 
     setArr(temp);
+    setExpArr(tempExp);
+
     /*
     setArr(() => {
       arr.filter((value, index) => {
@@ -55,18 +65,14 @@ function Body() {
 
   return (
     <div>
-      <div className="my-5 grid justify-items-center grid-rows-1">
+      <div className="my-5 grid justify-items-center grid-rows-1 ">
         <div
           className={cardCSS}
           onMouseEnter={() => {
-            setTimeout(() => {
-              setExpand(true);
-            }, 1000);
+            setExpand(true);
           }}
           onMouseLeave={() => {
-            setTimeout(() => {
-              setExpand(false);
-            }, 1000);
+            setExpand(false);
           }}
         >
           {expand ? (
@@ -96,7 +102,21 @@ function Body() {
       <div className="mx-8 grid grid-cols-4 gap-x-16 gap-y-4">
         {arr.map((value, index) => {
           return (
-            <div key={index} id={index} className={cardCSS}>
+            <div
+              /*
+              onMouseEnter={() => {
+                expArr[index] = true;
+                setExpArr(expArr);
+              }}
+              onMouseLeave={() => {
+                expArr[index] = false;
+                setExpArr(expArr);
+              }}
+               */
+              key={index}
+              id={index}
+              className={cardCSS}
+            >
               <div className="text-4xl font-light font-medium">
                 {value.title}{" "}
               </div>
