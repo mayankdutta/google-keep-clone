@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Card from "../components/Card";
 
 function Body() {
   let currTemp = "absolute w-full h-full bg-gray-800 shadow rounded-3xl ";
@@ -102,49 +103,7 @@ function Body() {
 
       <div className="mx-8 grid grid-cols-4 gap-x-16 gap-y-8">
         {arr.map((value, index) => {
-          return (
-            <div
-              /*
-              onMouseEnter={() => {
-                expArr[index] = true;
-                setExpArr(expArr);
-              }}
-              onMouseLeave={() => {
-                expArr[index] = false;
-                setExpArr(expArr);
-              }}
-               */
-              key={index}
-              id={index}
-              className="relative p-4 bg-yellow-400 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4"
-            >
-              <div
-                className={temp}
-                onMouseEnter={() => {
-                  temp = currTemp + " top-8 left-8";
-                }}
-                onMouseLeave={() => {
-                  temp = currTemp + " top-4 left-4";
-                }}
-                style={{ zIndex: "-1" }}
-              ></div>
-
-              <div className="overflow-auto text-4xl font-light font-medium border-b-8 border-gray-800">
-                {value.title}
-              </div>
-
-              <div className="overflow-auto ">{value.desc}</div>
-
-              <button
-                onClick={() => {
-                  del(index);
-                }}
-                className={buttonCSS}
-              >
-                -
-              </button>
-            </div>
-          );
+          return <Card value={value} index={index} deleteItem={del} />;
         })}
       </div>
     </div>
