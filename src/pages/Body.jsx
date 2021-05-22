@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 
 function Body() {
+  let currTemp = "absolute w-full h-full bg-gray-800 shadow rounded-3xl ";
+  let temp = "absolute w-full h-full bg-gray-800 shadow rounded-3xl ";
   const mainCardCSS =
     "p-4 bg-gray-100 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4 ";
   const buttonCSS =
@@ -117,7 +119,13 @@ function Body() {
               className="relative p-4 bg-yellow-400 shadow-2xl grid grid-rows-3 rounded-3xl gap-y-4"
             >
               <div
-                className="absolute w-full h-full bg-gray-800 shadow rounded-3xl top-4 left-4"
+                className={temp}
+                onMouseEnter={() => {
+                  temp = currTemp + " top-8 left-8";
+                }}
+                onMouseLeave={() => {
+                  temp = currTemp + " top-4 left-4";
+                }}
                 style={{ zIndex: "-1" }}
               ></div>
 
